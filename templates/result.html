@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detection Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <div class="card shadow-lg p-4 mb-4">
+        <h2 class="text-center mb-4">Analysis Result</h2>
+
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h5>SSIM Score</h5>
+                <h3 class="text-primary">{{ result.ssim_score }}</h3>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Status</h5>
+                {% if result.is_tampered %}
+                    <h3 class="text-danger">Tampered</h3>
+                {% else %}
+                    <h3 class="text-success">Authentic</h3>
+                {% endif %}
+            </div>
+
+            <div class="col-md-4">
+                <h5>Confidence</h5>
+                <h3 class="text-warning">{{ result.confidence }}%</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Original (Marked)</h5>
+                <img class="img-fluid" src="data:image/png;base64,{{ result.original_marked }}">
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Tampered (Marked)</h5>
+                <img class="img-fluid" src="data:image/png;base64,{{ result.tampered_marked }}">
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Difference Map</h5>
+                <img class="img-fluid" src="data:image/png;base64,{{ result.diff_image }}">
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card p-3 shadow-sm">
+                <h5>Threshold Detection</h5>
+                <img class="img-fluid" src="data:image/png;base64,{{ result.thresh_image }}">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <a href="/" class="btn btn-primary">Analyze Another</a>
+    </div>
+
+</div>
+
+</body>
+</html>
